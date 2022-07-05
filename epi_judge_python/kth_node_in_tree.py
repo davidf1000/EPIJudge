@@ -13,10 +13,16 @@ class BinaryTreeNode:
         self.right = right
         self.size = size
 
+# coba di tranverse inorder dulu
 
 def find_kth_node_binary_tree(tree: BinaryTreeNode,
                               k: int) -> Optional[BinaryTreeNode]:
-    # TODO - you fill in here.
+    while tree:
+        left_size = tree.left.size if tree.left else 0
+        if left_size +1 < k: # k-th node must be in right subtree 
+            k -= left_size + 1 
+            tree = tree.right 
+
     return None
 
 

@@ -8,6 +8,8 @@ from test_framework.test_utils import enable_executor_hook
 # Assumes node_to_delete is not tail.
 def deletion_from_list(node_to_delete: ListNode) -> None:
     # TODO - you fill in here.
+    node_to_delete.data = node_to_delete.next.data
+    node_to_delete.next = node_to_delete.next.next
     return
 
 
@@ -27,6 +29,12 @@ def deletion_from_list_wrapper(executor, head, node_to_delete_idx):
 
 
 if __name__ == '__main__':
+    X = ListNode(4,ListNode(5))
+    L = ListNode(1,ListNode(2,ListNode(3,X)))
+    print(L)
+    deletion_from_list(X)
+    print(L)
+
     exit(
         generic_test.generic_test_main('delete_node_from_list.py',
                                        'delete_node_from_list.tsv',

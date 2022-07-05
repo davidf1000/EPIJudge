@@ -10,9 +10,25 @@ from test_framework.test_utils import enable_executor_hook
 
 def lca(tree: BinaryTreeNode, node0: BinaryTreeNode,
         node1: BinaryTreeNode) -> Optional[BinaryTreeNode]:
-    # TODO - you fill in here.
-    return None
-
+        if not tree:
+            return None #edge case
+        # base : check if node == node1 or node 2
+        # if not, compute result of dfs(left) and dfs(right)
+        # if dfs(left)==p and dfs(right)==q :return current node
+        # if dfs(left)==p or q and dfs(right)==None:return p or q
+        # if dfs(left)==None and dfs(right)= p or q: return p or q
+        # else: return None
+        def bfs(node:BinaryTreeNode)->BinaryTreeNode:
+            if not node:
+                return None
+            if node.data == node0.data or node.data == node1.data:
+                return node
+            left, right = bfs(node.left),bfs(node.right)
+            if left and right:
+                return node
+            elif (left and not right) or (right and not left):
+                return left or right
+        return bfs(tree)
 
 @enable_executor_hook
 def lca_wrapper(executor, tree, key1, key2):

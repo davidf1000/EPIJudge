@@ -14,10 +14,19 @@ class Name:
                 if self.first_name != other.first_name else
                 self.last_name < other.last_name)
 
+    def __eq__(self,other) -> bool:
+        return self.first_name == other.first_name
 
 def eliminate_duplicate(A: List[Name]) -> None:
-    # TODO - you fill in here.
-    return
+    A.sort()
+    write_idx, curr = 0, 0
+    while curr<len(A):
+        A[write_idx] = A[curr]
+        # create while scenario that >>cur until first name different
+        while curr<len(A) and A[curr] == A[write_idx]:
+            curr+=1
+        write_idx+=1
+    del A[write_idx:]
 
 
 @enable_executor_hook

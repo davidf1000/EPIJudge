@@ -13,8 +13,11 @@ from test_framework.test_utils import enable_executor_hook
 
 def nonuniform_random_number_generation(values: List[int],
                                         probabilities: List[float]) -> int:
-
+    print(values)
+    print(probabilities)
+    return
     prefix_sum_of_probabilities = list(itertools.accumulate(probabilities))
+    print(prefix_sum_of_probabilities)
     interval_idx = bisect.bisect(prefix_sum_of_probabilities, random.random())
     return values[interval_idx]
 
@@ -45,7 +48,12 @@ def nonuniform_random_number_generation_wrapper(executor, values,
 
 
 if __name__ == '__main__':
-    exit(
-        generic_test.generic_test_main(
-            'nonuniform_random_number.py', 'nonuniform_random_number.tsv',
-            nonuniform_random_number_generation_wrapper))
+    # exit(
+    #     generic_test.generic_test_main(
+    #         'nonuniform_random_number.py', 'nonuniform_random_number.tsv',
+    #         nonuniform_random_number_generation_wrapper))
+    A = [1,2,3]
+    P = [1/3,1/3,1/3]
+    prefix_sum_of_probabilities = list(itertools.accumulate(P))
+    print(prefix_sum_of_probabilities)
+

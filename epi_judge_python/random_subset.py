@@ -1,6 +1,7 @@
 import functools
 from typing import List
 
+from random import randint
 from test_framework import generic_test
 from test_framework.random_sequence_checker import (
     binomial_coefficient, check_sequence_is_uniformly_random,
@@ -10,8 +11,14 @@ from test_framework.test_utils import enable_executor_hook
 
 def random_subset(n: int, k: int) -> List[int]:
     # TODO - you fill in here.
-    return []
-
+    A = list(range(n))
+    # Random position 
+    for i in range(k):
+        # pick random from i - n-1 
+        r = randint(i,n-1)
+        # swap
+        A[i],A[r]= A[r],A[i]
+    return A[:k]
 
 @enable_executor_hook
 def random_subset_wrapper(executor, n, k):

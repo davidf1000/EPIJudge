@@ -8,7 +8,7 @@ from test_framework import generic_test
 def sort_approximately_sorted_array(sequence: Iterator[int],
                                     k: int) -> List[int]:
 
-    min_heap: List[int] = []
+    min_heap = []
     # Adds the first k elements into min_heap. Stop if there are fewer than k
     # elements.
     for x in itertools.islice(sequence, k):

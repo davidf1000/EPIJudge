@@ -1,6 +1,7 @@
 import copy
 import functools
 import math
+from random import random,randint
 from typing import List
 
 from test_framework import generic_test
@@ -11,7 +12,14 @@ from test_framework.test_utils import enable_executor_hook
 
 def compute_random_permutation(n: int) -> List[int]:
     # TODO - you fill in here.
-    return []
+    A = list(range(n))
+    # Random position 
+    for i in range(n):
+        # pick random from i - n-1 
+        r = randint(i,n-1)
+        # swap
+        A[i],A[r]= A[r],A[i]
+    return A
 
 
 @enable_executor_hook

@@ -3,8 +3,19 @@ from test_framework import generic_test
 
 
 def sum_root_to_leaf(tree: BinaryTreeNode) -> int:
-    # TODO - you fill in here.
-    return 0
+    def dfs(node:BinaryTreeNode,prev_sum:int)->int:
+        # base 
+        if not node:
+            return 0
+        # compute sum 
+        current_sum = prev_sum*2 + node.data
+        # if leaf 
+        if node and not node.left and not node.right:
+            return current_sum
+        # if not leaf
+        else:
+            return dfs(node.left,current_sum) + dfs(node.right,current_sum)
+    return dfs(tree,0)
 
 
 if __name__ == '__main__':

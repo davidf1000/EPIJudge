@@ -1,3 +1,4 @@
+from cmath import inf
 import collections
 import functools
 from typing import List
@@ -10,8 +11,19 @@ Event = collections.namedtuple('Event', ('start', 'finish'))
 
 
 def find_max_simultaneous_events(A: List[Event]) -> int:
-    # TODO - you fill in here.
-    return 0
+    if not A:
+        return 0
+    max_simul = -inf
+    endpoint = [(x.start,True) for x in A] + [(x.finish,False) for x in A]
+    endpoint.sort(key=lambda x: (x[0],not x[1]))
+    sum = 0
+    for item in endpoint:
+        if item[1]:
+            sum+=1
+            max_simul = max(max_simul,sum)
+        else:
+            sum -=1
+    return max_simul
 
 
 @enable_executor_hook

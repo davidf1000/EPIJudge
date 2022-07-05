@@ -4,8 +4,17 @@ from test_framework import generic_test
 
 
 def matrix_search(A: List[List[int]], x: int) -> bool:
-    # TODO - you fill in here.
-    return True
+    if not A:
+        return False
+    r,c = 0, len(A[0])-1
+    while 0<=r<len(A) and 0<=c<len(A[0]):
+        if A[r][c] < x:
+            r += 1
+        elif A[r][c] > x:  
+            c -= 1
+        else:
+            return True
+    return False
 
 
 if __name__ == '__main__':

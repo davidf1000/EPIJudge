@@ -1,3 +1,4 @@
+from asyncore import write
 import functools
 from typing import List
 
@@ -6,8 +7,30 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def replace_and_remove(size: int, s: List[str]) -> int:
-    # TODO - you fill in here.
-    return 0
+    # creatw write index, and count a 
+    write_idx, count_a = 0,0
+    # loop the array, if b dont write, else write it, if a count it 
+    for i in range(size):
+        if s[i] != 'b':
+            s[write_idx] = s[i]
+            write_idx += 1
+        if s[i] == 'a':
+            count_a += 1
+
+    curr_idx = write_idx -1 
+    write_idx += count_a -1 
+    final_size = write_idx + 1 
+    while curr_idx>=0:
+        # if not a, replace like ussual
+        if s[curr_idx] !='a' :
+            s[write_idx] = s[curr_idx]
+            write_idx-=1
+        else:
+            # if a, write 2 d backward then increment2x write idx
+            s[write_idx] = s[write_idx-1] = 'd'
+            write_idx-=2
+        curr_idx-=1 
+    return final_size
 
 
 @enable_executor_hook

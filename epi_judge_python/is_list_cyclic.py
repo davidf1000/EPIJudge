@@ -8,7 +8,35 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def has_cycle(head: ListNode) -> Optional[ListNode]:
-    # TODO - you fill in here.
+    # If list is empty or has only one node
+    # without loop
+    if (head == None or head.next == None):
+        return None
+    def count_size(end):
+        start = end
+        count = 0
+        while True:
+            start = start.next
+            count +=1 
+            if start is end:
+                return count
+    
+    slow, fast = head,head
+    while fast and fast.next:
+        # keep tranversing
+        slow,fast = slow.next,fast.next.next
+        if slow is fast:
+            # there's a cycle, create 2 counter
+            it1 = head
+            for _ in range(count_size(slow)):
+                it1 = it1.next
+            # second it
+            it2 = head
+            # run both iterator until they met
+            while it1 is not it2:
+                it1 = it1.next
+                it2 = it2.next
+            return it1
     return None
 
 

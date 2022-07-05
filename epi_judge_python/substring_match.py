@@ -3,7 +3,10 @@ from test_framework import generic_test
 
 def rabin_karp(t: str, s: str) -> int:
     # TODO - you fill in here.
-    return 0
+    try:
+        return t.index(s)
+    except:
+        return -1
 
 
 if __name__ == '__main__':
