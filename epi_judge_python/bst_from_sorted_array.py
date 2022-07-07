@@ -8,10 +8,19 @@ from test_framework.binary_tree_utils import (binary_tree_height,
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
+# build bst recursively
+# base : len == 0 -> return None
+# get middle item, put it on top node, call build for left and right subarray recursively
+
 
 def build_min_height_bst_from_sorted_array(A: List[int]) -> Optional[BstNode]:
-    # TODO - you fill in here.
-    return None
+    if len(A) == 0:
+        return None
+    if len(A) == 1:
+        return BstNode(A[0])
+    mid_idx = len(A)//2
+    return BstNode(A[mid_idx], build_min_height_bst_from_sorted_array(A[:mid_idx]),
+                   build_min_height_bst_from_sorted_array(A[mid_idx + 1:]))
 
 
 @enable_executor_hook

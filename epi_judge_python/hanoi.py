@@ -7,10 +7,25 @@ from test_framework.test_utils import enable_executor_hook
 
 NUM_PEGS = 3
 
+# recursive
+# from_peg, to_peg, other_peg
+# base : n == 0, return None (nothing to move)
+# else :
+# move (n-1) from_peg, other_peg, to_peg
+# move bottom plate from_peg -> to_peg
+# move (n-1) plate other_peg -> to peg (from_peg)
+
 
 def compute_tower_hanoi(num_rings: int) -> List[List[int]]:
-    # TODO - you fill in here.
-    return []
+    result: List[int] = []
+    def move(n, from_peg, to_peg, other_peg):
+        if n == 0:
+            return None
+        move(n-1, from_peg, other_peg, to_peg)
+        result.append([from_peg, to_peg])
+        move(n-1, other_peg, to_peg, from_peg)
+    move(num_rings, 0, 1, 2)
+    return result
 
 
 @enable_executor_hook

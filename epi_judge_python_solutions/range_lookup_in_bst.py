@@ -24,8 +24,9 @@ def range_lookup_in_bst(tree: BstNode, interval: Interval) -> List[int]:
 
     result: List[int] = []
     range_lookup_in_bst_helper(tree)
-    return result
 
+
+    return result
 
 def range_lookup_in_bst_wrapper(tree, i):
     return range_lookup_in_bst(tree, Interval(*i))

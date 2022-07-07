@@ -27,8 +27,8 @@ def examine_buildings_with_sunset_wrapper(sequence):
 
 
 if __name__ == '__main__':
-    # print(examine_buildings_with_sunset([6, 9, 3, 9, 5, 16, 9, 13]))
-    # exit()
+    print(examine_buildings_with_sunset([6, 9, 3, 9, 5, 16, 9, 13]))
+    exit()
     exit(
         generic_test.generic_test_main('sunset_view.py', 'sunset_view.tsv',
                                        examine_buildings_with_sunset))

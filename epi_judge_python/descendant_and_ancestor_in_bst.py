@@ -5,9 +5,17 @@ from test_framework import generic_test
 from test_framework.binary_tree_utils import must_find_node
 from test_framework.test_utils import enable_executor_hook
 
+# recursive
+# base : A is middle -> return true
+# base : middle is B -> return true 
+# base : B is None -> return false
+# base : A is None -> return false
+# is_A = recursive call :
+# A < middle, pair_includes (A, middle.left, B) : pair_includes(A, middle.right)
+# is_B = recusive call 
 
-def pair_includes_ancestor_and_descendant_of_m(possible_anc_or_desc_0: BstNode,
-                                               possible_anc_or_desc_1: BstNode,
+def pair_includes_ancestor_and_descendant_of_m(A: BstNode,
+                                               B: BstNode,
                                                middle: BstNode) -> bool:
     # TODO - you fill in here.
     return True

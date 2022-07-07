@@ -14,15 +14,15 @@ def find_max_simultaneous_events(A: List[Event]) -> int:
     if not A:
         return 0
     max_simul = -inf
-    endpoint = [(x.start,True) for x in A] + [(x.finish,False) for x in A]
-    endpoint.sort(key=lambda x: (x[0],not x[1]))
+    endpoint = [(x.start, True) for x in A] + [(x.finish, False) for x in A]
+    endpoint.sort(key=lambda x: (x[0], not x[1]))
     sum = 0
     for item in endpoint:
         if item[1]:
-            sum+=1
-            max_simul = max(max_simul,sum)
+            sum += 1
+            max_simul = max(max_simul, sum)
         else:
-            sum -=1
+            sum -= 1
     return max_simul
 
 

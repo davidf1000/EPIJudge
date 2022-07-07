@@ -22,33 +22,34 @@ def find_smallest_subarray_covering_set(paragraph: List[str],
     # min dist and idx
     window, map_keyword = {}, {}
     left = 0
-    min_dist, min_start,min_end = inf, -1, -1
+    min_dist, min_start, min_end = inf, -1, -1
     # fill map and window
     for item in keywords:
-        map_keyword[item] = map_keyword.get(item,0) + 1
+        map_keyword[item] = map_keyword.get(item, 0) + 1
         window[item] = 0
     need, have = len(map_keyword), 0
-    for r,char in enumerate(paragraph):
+    for r, char in enumerate(paragraph):
         # ++ counter window
-        if char in map_keyword: 
-            window[char] = 1 + window.get(char,0)
+        if char in map_keyword:
+            window[char] = 1 + window.get(char, 0)
             # update have if ++ make it surpasses requirement and char in map
             if window[char] == map_keyword[char]:
-                have+=1 
+                have += 1
         # if have == need, keep moving left >>, if in map --, check if it makes have decreases
-        while have == need and left<=r:
+        while have == need and left <= r:
             char_left = paragraph[left]
             # update min
             dist = r - left
             if dist < min_dist:
                 min_dist, min_start, min_end = dist, left, r
             if char_left in map_keyword:
-                window[char_left] -=1
+                window[char_left] -= 1
                 if window[char_left] < map_keyword[char_left]:
-                    have -=1
+                    have -= 1
             # move left >>
-            left +=1 
-    return Subarray(min_start,min_end) if min_dist != inf else ''
+            left += 1
+    return Subarray(min_start, min_end) if min_dist != inf else ''
+
 
 @enable_executor_hook
 def find_smallest_subarray_covering_set_wrapper(executor, paragraph, keywords):

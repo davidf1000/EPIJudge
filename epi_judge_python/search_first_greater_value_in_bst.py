@@ -3,10 +3,21 @@ from typing import Optional
 from bst_node import BstNode
 from test_framework import generic_test
 
+# track current node and closest_to_k
+# while node is not None,
+# if data > k -> save number to closest, proceed to left (try finding closer num)
+# else (data < k) -> no hope if going left, go right
+
 
 def find_first_greater_than_k(tree: BstNode, k: int) -> Optional[BstNode]:
-    # TODO - you fill in here.
-    return None
+    curr_node, closest_k = tree, None
+    while (curr_node):
+        if curr_node.data > k:
+            closest_k = curr_node
+            curr_node = curr_node.left
+        else:
+            curr_node = curr_node.right
+    return closest_k
 
 
 def find_first_greater_than_k_wrapper(tree, k):

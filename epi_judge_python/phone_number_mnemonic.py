@@ -26,6 +26,7 @@ def phone_mnemonic(phone_number: str) -> List[str]:
             res.append(''.join(temp))
             return
         for j in MAP[L[s]]:
+            print(j)
             generate_combination(L, temp+[j], s+1)
     res = []
     generate_combination(list(phone_number), [], 0)

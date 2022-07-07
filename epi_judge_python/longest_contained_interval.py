@@ -9,16 +9,17 @@ def longest_contained_range(A: List[int]) -> int:
     setA = set(A)
     while setA:
         item = setA.pop()
-        left,right = item-1, item+1
-        curr_sum , length = item, 1
+        left, right = item-1, item+1
+        length = 1
         while left in setA or right in setA:
             if left in setA:
                 setA.remove(left)
-                curr_sum, length, left = curr_sum + left, length + 1, left-1
+                length, left = length + 1, left-1
             if right in setA:
                 setA.remove(right)
-                curr_sum,length, right = curr_sum + right, length + 1, right +1
-        if length > longest: longest = length
+                length, right = length + 1, right + 1
+        if length > longest:
+            longest = length
     return longest if longest != -inf else 0
 
 

@@ -3,17 +3,17 @@ from test_framework import generic_test
 
 
 def has_path_sum(tree: BinaryTreeNode, remaining_weight: int) -> bool:
-    # base 
+    # base
     if not tree:
         return False
     # compute current remaining weight (preorder)
     current_remaining_weight = remaining_weight - tree.data
-    # check if leaf 
+    # check if leaf
     if tree and not tree.left and not tree.right:
-        return current_remaining_weight==0
-    else: # if not leaf
-        return has_path_sum(tree.left,current_remaining_weight) or has_path_sum(
-            tree.right,current_remaining_weight
+        return current_remaining_weight == 0
+    else:  # if not leaf
+        return has_path_sum(tree.left, current_remaining_weight) or has_path_sum(
+            tree.right, current_remaining_weight
         )
 
 
