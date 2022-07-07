@@ -11,11 +11,41 @@ WHITE, BLACK = range(2)
 
 Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
 
+# path to track
+# check if current path is feasible
+# if yes, then add to path, paint black to make it visited,
+# check if curr is equal to end : if yes then true
+# check if can go up, down, left, or right
+# if can, return True
+# if can't delete the path, return false
+
 
 def search_maze(maze: List[List[int]], s: Coordinate,
                 e: Coordinate) -> List[Coordinate]:
-    # TODO - you fill in here.
-    return []
+    path = []
+
+    def is_maze(curr: Coordinate) -> bool:
+        if not (0 <= curr.x < len(maze) and 0 <= curr.y < len(maze[curr.x])
+                and maze[curr.x][curr.y] == WHITE):
+            return False
+        # path is feasible
+        path.append(curr)
+        maze[curr.x][curr.y] = BLACK
+        if curr == e:
+            return True
+        if any([is_maze(Coordinate(curr.x-1, curr.y)),
+                is_maze(Coordinate(curr.x+1, curr.y)),
+                is_maze(Coordinate(curr.x, curr.y-1)),
+                is_maze(Coordinate(curr.x, curr.y+1))]):
+            return True
+        # else
+        del path[-1]
+        return False
+
+    if is_maze(s):
+        return path
+    else:
+        return []
 
 
 def path_element_is_feasible(maze, prev, cur):
@@ -23,9 +53,9 @@ def path_element_is_feasible(maze, prev, cur):
             (0 <= cur.y < len(maze[cur.x])) and maze[cur.x][cur.y] == WHITE):
         return False
     return cur == (prev.x + 1, prev.y) or \
-           cur == (prev.x - 1, prev.y) or \
-           cur == (prev.x, prev.y + 1) or \
-           cur == (prev.x, prev.y - 1)
+        cur == (prev.x - 1, prev.y) or \
+        cur == (prev.x, prev.y + 1) or \
+        cur == (prev.x, prev.y - 1)
 
 
 @enable_executor_hook
