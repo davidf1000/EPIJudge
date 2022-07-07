@@ -7,10 +7,22 @@ from test_framework.test_utils import enable_executor_hook
 
 Interval = collections.namedtuple('Interval', ('left', 'right'))
 
+# track last visit, and number of visit
+# sort based on right interval
+# loop for interval
+# if last visit time < leftmost side:
+#   number visit ++
+#   last visit = interval.right
+
 
 def find_minimum_visits(intervals: List[Interval]) -> int:
-    # TODO - you fill in here.
-    return 0
+    last_visit, num_visit = float('-inf'), 0
+    intervals.sort(key=lambda x: x.right)
+    for interval in intervals:
+        if last_visit < interval.left:
+            num_visit += 1
+            last_visit = interval.right
+    return num_visit
 
 
 @enable_executor_hook
